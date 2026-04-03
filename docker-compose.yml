@@ -1,6 +1,6 @@
 services:
   svc-ollama:
-    image: ${OLLAMA_IMAGE}:${OLLAMA_IMAGE_TAG}
+    image: ${OLLAMA_IMAGE_NAME}:${OLLAMA_IMAGE_TAG}
     container_name: ${OLLAMA_CONTAINER_NAME}
     ports:
       - "${OLLAMA_PORT}:11434"
@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   svc-open-webui:
-    image: ${OPENWEBUI_IMAGE}:${OPENWEBUI_IMAGE_TAG}
+    image: ${OPENWEBUI_IMAGE_NAME}:${OPENWEBUI_IMAGE_TAG}
     container_name: ${OPENWEBUI_CONTAINER_NAME}
     ports:
       - "${OPENWEBUI_PORT}:8080"
