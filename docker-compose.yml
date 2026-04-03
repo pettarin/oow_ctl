@@ -1,0 +1,44 @@
+services:
+  svc-ollama:
+    image: ${OLLAMA_IMAGE}:${OLLAMA_IMAGE_TAG}
+    container_name: ${OLLAMA_CONTAINER_NAME}
+    ports:
+      - "${OLLAMA_PORT}:11434"
+    volumes:
+      - vol-ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  svc-open-webui:
+    image: ${OPENWEBUI_IMAGE}:${OPENWEBUI_IMAGE_TAG}
+    container_name: ${OPENWEBUI_CONTAINER_NAME}
+    ports:
+      - "${OPENWEBUI_PORT}:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://svc-ollama:11434
+      - WEBUI_AUTH=false
+    volumes:
+      - vol-open-webui:/app/backend/data
+    depends_on:
+      - svc-ollama
+    restart: unless-stopped
+
+volumes:
+  vol-ollama:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${OLLAMA_VOLUME}
+  vol-open-webui:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${OPENWEBUI_VOLUME}
