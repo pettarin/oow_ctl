@@ -17,6 +17,11 @@ Both services store persistent data on an external volume (`/mnt/usb/docker/`) v
 - [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) for GPU support
 - A mounted volume at `/mnt/usb/docker/` (or adjust the paths in `oow_ctl.sh`)
 
+> **Note:** This script is designed for a system with limited storage on the primary SSD
+> where `/` is mounted (Asus Ascent GX10, similar to an NVIDIA DGX Spark).
+> Additional space is available on a storage device mounted at `/mnt/usb/`,
+> which is why Docker volumes are stored there instead of on the root filesystem.
+
 ## Quick start
 
 ```bash
@@ -48,13 +53,13 @@ All settings are defined as environment variables at the top of `oow_ctl.sh`:
 
 | Variable               | Default                      | Description                   |
 |------------------------|------------------------------|-------------------------------|
-| `OLLAMA_IMAGE_NAME`    | `ollama/ollama`              | Ollama Docker image           |
+| `OLLAMA_IMAGE_NAME`    | `ollama/ollama`              | Ollama Docker image name      |
 | `OLLAMA_IMAGE_TAG`     | `0.20.0`                     | Ollama image tag              |
 | `OLLAMA_PORT`          | `11434`                      | Host port for the Ollama API  |
 | `OLLAMA_VOLUME`        | `/mnt/usb/docker/ollama`     | Host path for Ollama data     |
-| `OPENWEBUI_IMAGE_NAME` | `openwebui/open-webui`       | Open WebUI Docker image       |
+| `OPENWEBUI_IMAGE_NAME` | `openwebui/open-webui`       | Open WebUI Docker image name  |
 | `OPENWEBUI_IMAGE_TAG`  | `latest`                     | Open WebUI image tag          |
-| `OPENWEBUI_PORT`       | `8080`                       | Host port for the web UI      |
+| `OPENWEBUI_PORT`       | `8080`                       | Host port for the Web UI      |
 | `OPENWEBUI_VOLUME`     | `/mnt/usb/docker/open-webui` | Host path for Open WebUI data |
 
 ## License
