@@ -24,8 +24,20 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOCKER_COMPOSE_MANIFEST_PATH="${SCRIPT_DIR}/${DOCKER_COMPOSE_MANIFEST_FILE_NAME}"
 
 usage() {
-    echo "Usage: $0 {df|logs|start|status|stop|top}"
+    echo "Usage: $0 {df|logs|restart|start|status|stop|top}"
     exit 1
+}
+
+do_start() {
+    echo "[INFO] Starting ollama and open-webui ..."
+    docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" up -d
+    echo "[INFO] Starting ollama and open-webui ... done"
+}
+
+do_stop() {
+    echo "[INFO] Stopping ollama and open-webui ..."
+    docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" down
+    echo "[INFO] Stopping ollama and open-webui ... done"
 }
 
 case "${1:-}" in
@@ -45,18 +57,18 @@ case "${1:-}" in
         shift
         docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" logs "$@"
         ;;
+    restart)
+        do_stop
+        do_start
+        ;;
     start)
-        echo "[INFO] Starting ollama and open-webui ..."
-        docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" up -d
-        echo "[INFO] Starting ollama and open-webui ... done"
+        do_start
         ;;
     status)
         docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" ps
         ;;
     stop)
-        echo "[INFO] Stopping ollama and open-webui ..."
-        docker compose -f "$DOCKER_COMPOSE_MANIFEST_PATH" down
-        echo "[INFO] Stopping ollama and open-webui ... done"
+        do_stop
         ;;
     top)
         shift

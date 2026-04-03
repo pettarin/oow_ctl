@@ -29,17 +29,18 @@ Open WebUI will be available at <http://localhost:8080>.
 ## Usage
 
 ```
-./oow_ctl.sh {df|logs|start|status|stop|top}
+./oow_ctl.sh {df|logs|restart|start|status|stop|top}
 ```
 
-| Command  | Description                                                         |
-|----------|---------------------------------------------------------------------|
-| `start`  | Start Ollama and Open WebUI in detached mode                        |
-| `stop`   | Stop and remove both containers                                     |
-| `status` | Show running container status                                       |
-| `logs`   | Tail container logs (extra args forwarded to `docker compose logs`) |
-| `top`    | Show running processes inside containers                            |
-| `df`     | Show free disk space on `/` and the data volumes                    |
+| Command   | Description                                                         |
+|-----------|---------------------------------------------------------------------|
+| `df`      | Show free disk space on `/` and the data volumes                    |
+| `logs`    | Tail container logs (extra args forwarded to `docker compose logs`) |
+| `restart` | Stop and then start both containers                                 |
+| `start`   | Start Ollama and Open WebUI in detached mode                        |
+| `status`  | Show running container status                                       |
+| `stop`    | Stop and remove both containers                                     |
+| `top`     | Show running processes inside containers                            |
 
 ## Configuration
 
