@@ -14,6 +14,7 @@ export OPENWEBUI_CONTAINER_NAME="${OPENWEBUI_CONTAINER_NAME:-open-webui}"
 export OPENWEBUI_IMAGE="${OPENWEBUI_IMAGE:-openwebui/open-webui}"
 export OPENWEBUI_IMAGE_TAG="${OPENWEBUI_IMAGE_TAG:-latest}"
 export OPENWEBUI_PORT="${OPENWEBUI_PORT:-8080}"
+export OPENWEBUI_USER_AGENT="${OPENWEBUI_USER_AGENT:-Mozilla/5.0 (X11; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0}"
 export OPENWEBUI_VOLUME="${OPENWEBUI_VOLUME:-/mnt/usb/docker/open-webui}"
 
 # ---------------------------------------------------------------------------

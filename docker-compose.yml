@@ -22,6 +22,7 @@ services:
       - "${OPENWEBUI_PORT}:8080"
     environment:
       - OLLAMA_BASE_URL=http://svc-ollama:11434
+      - USER_AGENT=${OPENWEBUI_USER_AGENT}
       - WEBUI_AUTH=false
     volumes:
       - vol-open-webui:/app/backend/data
